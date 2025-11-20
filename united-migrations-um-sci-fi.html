@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>United Migrations – Global Movement for Human Mobility</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="United Migrations is a global movement redesigning human mobility so moving across borders becomes safer, fairer, and better for everyone." />
+  <style>
+    :root {
+      --bg: #050712;
+      --bg-alt: #090c1a;
+      --bg-soft: #101425;
+      --accent: #4de3c2;
+      --accent-soft: rgba(77, 227, 194, 0.1);
+      --accent-strong: #42c4a4;
+      --text: #f7f7ff;
+      --muted: #b5bfd8;
+      --danger: #ff5c7a;
+      --border: #252b45;
+      --shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.5);
+      --radius-lg: 24px;
+      --radius-xl: 32px;
+      --radius-pill: 999px;
+      --max-width: 1120px;
+      --transition-fast: 0.18s ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", sans-serif;
+      background: radial-gradient(circle at top, #121733 0, #03040a 40%, #000000 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    main {
+      min-height: 100vh;
+      padding: 24px 16px 64px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: var(--max-width);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* --- SCI-FI UM LOGO --- */
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 25% 20%, #ffffff 0, transparent 45%),
+        radial-gradient(circle at 80% 80%, #4de3c2 0, transparent 55%),
+        radial-gradient(circle at 50% 50%, #020308 0, #050712 80%);
+      border: 1px solid rgba(77, 227, 194, 0.7);
+      box-shadow:
+        0 0 20px rgba(77, 227, 194, 0.7),
+        0 0 40px rgba(77, 227, 194, 0.4);
+      position: relative;
+      overflow: visible;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-mark::before {
+      /* orbit ring */
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(142, 244, 255, 0.35);
+      box-shadow: 0 0 30px rgba(142, 244, 255, 0.45);
+      transform: rotateX(72deg);
+      animation: um-orbit 6s linear infinite;
+    }
+
+    .brand-mark::after {
+      /* inner glow */
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(77, 227, 194, 0.25) 0, transparent 70%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .um-logo {
+      width: 74%;
+      height: 74%;
+      filter: drop-shadow(0 0 6px rgba(77, 227, 194, 0.8));
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-weight: 650;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    nav a {
+      position: relative;
+      padding-bottom: 3px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width var(--transition-fast);
+      border-radius: 999px;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(77, 227, 194, 0.35);
+      background: linear-gradient(120deg, rgba(77, 227, 194, 0.1), rgba(255, 255, 255, 0.02));
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--accent);
+    }
+
+    .nav-cta:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 22px rgba(77, 227, 194, 0.4);
+    }
+
+    /* HERO */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3.1fr) minmax(0, 2.6fr);
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .hero-tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: var(--radius-pill);
+      padding: 4px 10px 4px 4px;
+      background: rgba(16, 20, 37, 0.9);
+      border: 1px solid rgba(66, 196, 164, 0.6);
+      font-size: 0.78rem;
+      color: var(--muted);
+      max-width: max-content;
+    }
+
+    .hero-tagline-pill {
+      border-radius: var(--radius-pill);
+      padding: 4px 9px;
+      background: var(--accent-strong);
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.63rem;
+      color: #020308;
+    }
+
+    .hero-title {
+      font-size: clamp(2.15rem, 5vw, 3.15rem);
+      line-height: 1.02;
+      font-weight: 750;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #4de3c2, #8ef4ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 0.97rem;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 34rem;
+    }
+
+    .hero-sub strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .btn {
+      border-radius: var(--radius-pill);
+      padding: 10px 18px;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #050712;
+      box-shadow: 0 16px 40px rgba(77, 227, 194, 0.4);
+    }
+
+    .btn-primary span:last-child {
+      font-size: 1.1rem;
+      transform: translateY(1px);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.06);
+      transform: translateY(-0.5px);
+      box-shadow: 0 20px 52px rgba(77, 227, 194, 0.55);
+    }
+
+    .btn-ghost {
+      background: rgba(10, 12, 26, 0.9);
+      border: 1px solid rgba(181, 191, 216, 0.4);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(77, 227, 194, 0.7);
+      color: var(--accent);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-metas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .hero-chip {
+      border-radius: var(--radius-pill);
+      padding: 6px 10px;
+      border: 1px solid rgba(37, 43, 69, 0.9);
+      background: rgba(8, 10, 24, 0.95);
+    }
+
+    .hero-chip strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .hero-quick-join {
+      margin-top: 10px;
+      border-radius: 18px;
+      border: 1px solid rgba(37, 43, 69, 0.95);
+      background: rgba(6, 10, 24, 0.96);
+      padding: 8px 10px 10px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      max-width: 420px;
+    }
+
+    .hero-quick-join-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .hero-quick-join-header strong {
+      font-size: 0.82rem;
+      color: var(--text);
+    }
+
+    .hero-quick-join-header span {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+
+    .hero-quick-join form {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr) auto;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .hero-quick-join input,
+    .hero-quick-join select {
+      background: #020308;
+      border-radius: 999px;
+      border: 1px solid rgba(37, 43, 69, 0.95);
+      color: var(--text);
+      padding: 7px 9px;
+      font-size: 0.78rem;
+      font-family: inherit;
+      min-height: 32px;
+    }
+
+    .hero-quick-join input::placeholder {
+      color: rgba(181, 191, 216, 0.7);
+    }
+
+    .hero-quick-join button {
+      padding: 7px 11px;
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+
+    .hero-quick-join small {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.68rem;
+      color: var(--muted);
+      opacity: 0.9;
+    }
+
+    /* EARTH GLOBE CARD WITH ENHANCED 3D ROTATION */
+
+    .hero-right {
+      background: radial-gradient(circle at top, rgba(77, 227, 194, 0.25) 0, transparent 55%),
+                  radial-gradient(circle at bottom, rgba(255, 92, 122, 0.2) 0, transparent 60%);
+      border-radius: var(--radius-xl);
+      padding: 18px 18px 22px;
+      border: 1px solid rgba(77, 227, 194, 0.28);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right::before {
+      /* sci-fi scan lines */
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        to bottom,
+        rgba(142, 244, 255, 0.06),
+        rgba(142, 244, 255, 0.06) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      mix-blend-mode: soft-light;
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .globe {
+      position: relative;
+      padding: 18px;
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top, rgba(142, 244, 255, 0.14) 0, transparent 60%),
+                  linear-gradient(135deg, rgba(5, 7, 18, 0.9), rgba(16, 22, 50, 0.95));
+      border: 1px solid rgba(181, 191, 216, 0.2);
+      overflow: hidden;
+    }
+
+    .globe-3d-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 100%;
+      perspective: 1200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .globe-3d {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 82%;
+      transform-style: preserve-3d;
+      transform-origin: 50% 50%;
+      transform: translate(-50%, -50%) rotateX(18deg);
+      animation:
+        spinY 32s linear infinite,
+        globe-breathe 6s ease-in-out infinite;
+    }
+
+    .globe-3d img {
+      width: 100%;
+      display: block;
+      border-radius: 50%;
+      box-shadow:
+        0 0 40px rgba(77, 227, 194, 0.5),
+        0 0 80px rgba(77, 227, 194, 0.2);
+      transform: translateZ(30px);
+    }
+
+    .globe-halo {
+      position: absolute;
+      inset: 6%;
+      border-radius: 50%;
+      border: 1px dashed rgba(142, 244, 255, 0.45);
+      box-shadow: 0 0 40px rgba(142, 244, 255, 0.4);
+      transform: rotateX(72deg);
+      animation: halo-orbit 18s linear infinite;
+      pointer-events: none;
+    }
+
+    .globe-orbit-dot {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #ffecb3;
+      box-shadow: 0 0 16px rgba(255, 236, 179, 0.9);
+      top: 50%;
+      left: 50%;
+      transform-origin: -120px 0;
+      animation: orbit-dot 9s linear infinite;
+    }
+
+    .globe-labels {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 10px;
+      font-size: 0.75rem;
+    }
+
+    .globe-pill {
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: rgba(5, 7, 18, 0.9);
+      border: 1px solid rgba(181, 191, 216, 0.24);
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      color: var(--muted);
+    }
+
+    .globe-pill span:first-child {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.64rem;
+      color: var(--accent);
+    }
+
+    .globe-pill span:last-child {
+      font-weight: 600;
+      font-size: 0.76rem;
+    }
+
+    .globe-footer {
+      margin-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+
+    .globe-footer strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .globe-footer-badge {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(77, 227, 194, 0.6);
+      background: rgba(6, 10, 24, 0.96);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.6rem;
+    }
+
+    /* STRUCTURAL SECTIONS */
+
+    .section {
+      border-radius: var(--radius-xl);
+      background: rgba(5, 7, 18, 0.96);
+      padding: 20px 18px 18px;
+      border: 1px solid rgba(37, 43, 69, 0.95);
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 18px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 0.98rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section-kicker {
+      font-size: 0.8rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1.3fr;
+      gap: 18px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .section-grid p + p {
+      margin-top: 8px;
+    }
+
+    .section-grid h3 {
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .section-grid ul {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    .section-grid li {
+      padding: 6px 8px;
+      border-radius: 14px;
+      background: rgba(8, 12, 29, 0.9);
+      border: 1px solid rgba(37, 43, 69, 0.95);
+      font-size: 0.86rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .bullet {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(77, 227, 194, 0.9);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .pill {
+      padding: 6px 11px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(181, 191, 216, 0.35);
+      background: rgba(7, 10, 23, 0.9);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .pill span {
+      color: var(--accent);
+    }
+
+    .programs {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      font-size: 0.86rem;
+    }
+
+    .program-card {
+      border-radius: 18px;
+      border: 1px solid rgba(37, 43, 69, 0.95);
+      background: radial-gradient(circle at top left, rgba(77, 227, 194, 0.12) 0, transparent 55%),
+                  rgba(8, 12, 29, 0.97);
+      padding: 12px 11px 13px;
+    }
+
+    .program-tag {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .program-title {
+      font-size: 0.93rem;
+      margin-bottom: 4px;
+    }
+
+    .program-body {
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .program-meta {
+      font-size: 0.74rem;
+      color: var(--muted);
+      opacity: 0.86;
+    }
+
+    .join-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 18px;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .join-grid h3 {
+      font-size: 0.98rem;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+
+    .tiers {
+      display: grid;
+      gap: 7px;
+      margin-top: 6px;
+    }
+
+    .tier {
+      padding: 7px 9px;
+      border-radius: 14px;
+      border: 1px solid rgba(37, 43, 69, 0.95);
+      background: rgba(8, 12, 29, 0.9);
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.82rem;
+    }
+
+    .tier strong {
+      color: var(--accent);
+    }
+
+    .join-steps {
+      margin-top: 10px;
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .join-steps ol {
+      margin-top: 4px;
+      margin-left: 16px;
+      display: grid;
+      gap: 3px;
+    }
+
+    .join-steps li strong {
+      color: var(--accent);
+    }
+
+    .form {
+      border-radius: 18px;
+      border: 1px solid rgba(37, 43, 69, 0.95);
+      background: rgba(6, 10, 24, 0.96);
+      padding: 10px 11px 12px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .form-row label {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      background: #020308;
+      border-radius: 10px;
+      border: 1px solid rgba(37, 43, 69, 0.95);
+      color: var(--text);
+      padding: 7px 9px;
+      font-size: 0.82rem;
+      font-family: inherit;
+      resize: vertical;
+      min-height: 32px;
+    }
+
+    .form-row input::placeholder,
+    .form-row textarea::placeholder {
+      color: rgba(181, 191, 216, 0.7);
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(77, 227, 194, 0.5);
+    }
+
+    .form-hint {
+      font-size: 0.7rem;
+      color: var(--muted);
+      opacity: 0.9;
+    }
+
+    .form button {
+      margin-top: 4px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .form-divider {
+      margin: 10px 0 4px;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      position: relative;
+    }
+
+    .form-divider::before,
+    .form-divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 24%;
+      height: 1px;
+      background: rgba(37, 43, 69, 0.9);
+    }
+
+    .form-divider::before { left: 0; }
+    .form-divider::after { right: 0; }
+
+    footer {
+      margin-top: 20px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(37, 43, 69, 0.9);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    footer a {
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    /* ANIMATIONS */
+
+    @keyframes spinY {
+      from { transform: translate(-50%, -50%) rotateX(18deg) rotateY(0deg); }
+      to   { transform: translate(-50%, -50%) rotateX(18deg) rotateY(360deg); }
+    }
+
+    @keyframes globe-breathe {
+      0%, 100% { transform: translate(-50%, -50%) rotateX(18deg) scale(1); }
+      50%      { transform: translate(-50%, -50%) rotateX(18deg) scale(1.03); }
+    }
+
+    @keyframes halo-orbit {
+      from { transform: rotateX(72deg) rotateZ(0deg); }
+      to   { transform: rotateX(72deg) rotateZ(360deg); }
+    }
+
+    @keyframes orbit-dot {
+      from { transform: rotate(0deg) translate(-120px, 0); }
+      to   { transform: rotate(360deg) translate(-120px, 0); }
+    }
+
+    @keyframes um-orbit {
+      from { transform: rotateX(72deg) rotateZ(0deg); }
+      to   { transform: rotateX(72deg) rotateZ(360deg); }
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 900px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .hero-quick-join form {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .section-grid,
+      .programs,
+      .join-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .globe-labels {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      main {
+        padding-inline: 14px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .hero-tagline {
+        width: 100%;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .hero-actions .btn {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .section {
+        padding-inline: 14px;
+      }
+
+      .program-card {
+        padding-inline: 10px;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="shell">
+      <header>
+        <div class="brand">
+          <div class="brand-mark">
+            <!-- Sci-fi "UM" monogram logo -->
+            <svg class="um-logo" viewBox="0 0 64 64" aria-hidden="true">
+              <defs>
+                <linearGradient id="umGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#8ef4ff"/>
+                  <stop offset="50%" stop-color="#4de3c2"/>
+                  <stop offset="100%" stop-color="#42c4ff"/>
+                </linearGradient>
+              </defs>
+              <!-- base hex / shield -->
+              <path d="M32 4 L50 14 L50 34 L32 60 L14 34 L14 14 Z"
+                    fill="none"
+                    stroke="url(#umGrad)"
+                    stroke-width="2.5"
+                    stroke-linejoin="round" />
+              <!-- U shape -->
+              <path d="M19 18 L19 34 C19 41 24 46 32 46 C40 46 45 41 45 34 L45 18"
+                    fill="none"
+                    stroke="url(#umGrad)"
+                    stroke-width="3"
+                    stroke-linecap="round" />
+              <!-- inner M pulse -->
+              <path d="M22 20 L26 36 L32 24 L38 36 L42 20"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="1.9"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    opacity="0.9" />
+              <!-- center node -->
+              <circle cx="32" cy="24" r="2.2" fill="#ffffff" />
+            </svg>
+          </div>
+          <div class="brand-text">
+            <div class="brand-title">UNITED MIGRATIONS</div>
+            <div class="brand-sub">Global Movement for Human Mobility</div>
+          </div>
+        </div>
+        <nav>
+          <a href="#about">Why We Exist</a>
+          <a href="#programs">What We Do</a>
+          <a href="#join">Join</a>
+          <a href="#faq">FAQ</a>
+          <a href="#join" class="nav-cta">Join in 30 seconds</a>
+        </nav>
+      </header>
+
+      <!-- HERO -->
+      <section class="hero" id="top">
+        <div class="hero-left">
+          <div class="hero-tagline">
+            <div class="hero-tagline-pill">New Global Movement</div>
+            For a world where moving is normal, safe & fair.
+          </div>
+          <h1 class="hero-title">
+            We’re redesigning how <span>humans move</span><br />
+            across a changing planet.
+          </h1>
+          <p class="hero-sub">
+            <strong>United Migrations</strong> is a global organisation turning migration from a permanent “crisis” into
+            a shared project. We connect cities, communities, and people on the move to build
+            <strong>safe routes, fair rules, and real opportunities</strong> in the age of climate and digital mobility.
+          </p>
+          <div class="hero-actions">
+            <a href="#join" class="btn btn-primary">
+              <span>Join the movement</span>
+              <span>↗</span>
+            </a>
+            <a href="#about" class="btn btn-ghost">
+              Read what we actually do
+            </a>
+          </div>
+          <div class="hero-metas">
+            <div class="hero-chip"><strong>2025–2035:</strong> The decisive decade of mobility</div>
+            <div class="hero-chip">For cities, networks, and humans on the move</div>
+          </div>
+
+          <div class="hero-quick-join">
+            <div class="hero-quick-join-header">
+              <strong>Join in 30 seconds</strong>
+              <span>No commitment, just connection</span>
+            </div>
+            <form>
+              <input type="email" name="email" placeholder="you@email.com" required />
+              <select name="capacity">
+                <option value="">I’m joining as…</option>
+                <option value="mover">Mover / migrant / nomad</option>
+                <option value="city">City / region representative</option>
+                <option value="org">Organisation / foundation</option>
+                <option value="researcher">Researcher / journalist</option>
+                <option value="ally">Ally who wants to help</option>
+              </select>
+              <button type="submit" class="btn btn-primary">
+                <span>Sign up</span><span>→</span>
+              </button>
+            </form>
+            <small>We’ll send you a welcome note, next calls, and ways to plug in. You can opt out anytime.</small>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="globe">
+            <div class="globe-3d-wrap">
+              <div class="globe-3d" id="um-globe">
+                <!-- Earth image kept remote for now; can be swapped for local asset -->
+                <img src="https://freesvg.org/img/3d-Earth-Globe.png" alt="3D Earth globe" />
+              </div>
+              <div class="globe-halo"></div>
+              <div class="globe-orbit-dot"></div>
+            </div>
+            <div class="globe-labels">
+              <div class="globe-pill">
+                <span>People</span><span>Movers, migrants, nomads</span>
+              </div>
+              <div class="globe-pill">
+                <span>Cities</span><span>Welcoming hubs &amp; corridors</span>
+              </div>
+              <div class="globe-pill">
+                <span>Data</span><span>Reality instead of fear</span>
+              </div>
+              <div class="globe-pill">
+                <span>Planet</span><span>Climate-safe relocation</span>
+              </div>
+            </div>
+
+            <div class="globe-footer">
+              <div>
+                <strong>United Migrations Network</strong><br />
+                A living map of people, cities &amp; organisations building new rules for human mobility.
+              </div>
+              <div class="globe-footer-badge">
+                Founding Cohort · 2025
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY -->
+      <section id="about" class="section">
+        <div class="section-header">
+          <div class="section-title">Why united migrations exists</div>
+          <div class="section-kicker">From panic to design</div>
+        </div>
+        <div class="section-grid">
+          <div>
+            <div class="badge">
+              <span class="bullet"></span>
+              Migration is not an exception. It’s the story of humanity.
+            </div>
+            <p>
+              People move. For work, for safety, for love, for curiosity, for climate. The real question is not
+              “migration or no migration”, but <strong>chaos vs. coordination</strong>, exploitation vs. fairness,
+              fear vs. design.
+            </p>
+            <p>
+              United Migrations is an independent, global organisation that builds the
+              <strong>infrastructure, standards, and alliances</strong> needed to make human mobility humane, predictable,
+              and genuinely beneficial for everyone involved.
+            </p>
+          </div>
+          <div>
+            <h3>We are here to fix three big failures:</h3>
+            <ul>
+              <li><strong>Information failure:</strong> fear and fake numbers shape policy more than evidence and lived experience.</li>
+              <li><strong>Coordination failure:</strong> cities, countries, and migrants act in silos and improvise every crisis.</li>
+              <li><strong>Imagination failure:</strong> we tweak old borders instead of inventing new pathways and agreements.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHAT -->
+      <section id="programs" class="section">
+        <div class="section-header">
+          <div class="section-title">What united migrations does</div>
+          <div class="section-kicker">From manifesto to mechanisms</div>
+        </div>
+        <div class="pill-row">
+          <div class="pill"><span>1</span>&nbsp; Design & test new mobility models.</div>
+          <div class="pill"><span>2</span>&nbsp; Connect cities, networks & people on the move.</div>
+          <div class="pill"><span>3</span>&nbsp; Replace fear stories with real data & human stories.</div>
+        </div>
+        <div class="programs">
+          <div class="program-card">
+            <div class="program-tag">Lab</div>
+            <div class="program-title">Migration Prototypes Lab</div>
+            <div class="program-body">
+              We co-create pilot projects: climate relocation corridors, skills-based visas, circular migration schemes,
+              and digital-nomad compacts. Every prototype is designed <strong>with</strong> migrants, not just about them.
+            </div>
+            <div class="program-meta">Partners: cities, ministries, foundations, tech & community networks.</div>
+          </div>
+          <div class="program-card">
+            <div class="program-tag">Data</div>
+            <div class="program-title">Mobility Intelligence Observatory</div>
+            <div class="program-body">
+              A living evidence hub combining research, frontline reports, and lived experience. We track what works,
+              what fails, and where new pressure points are forming.
+            </div>
+            <div class="program-meta">Output: briefs, visual maps, early-warning signals & practical playbooks.</div>
+          </div>
+          <div class="program-card">
+            <div class="program-tag">Network</div>
+            <div class="program-title">Global Pathways Alliance</div>
+            <div class="program-body">
+              A membership network for cities, organisations, and movements that want to swap improvisation for shared
+              standards, joint projects, and coordinated messaging.
+            </div>
+            <div class="program-meta">Members: municipalities, NGOs, diaspora groups, impact-driven companies.</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- JOIN -->
+      <section id="join" class="section">
+        <div class="section-header">
+          <div class="section-title">Join united migrations</div>
+          <div class="section-kicker">Movement first, infrastructure second</div>
+        </div>
+        <div class="join-grid">
+          <div>
+            <h3>Who is this for?</h3>
+            <p>
+              United Migrations is building a <strong>coalition of unlikely allies</strong>: border cities and rural towns,
+              human rights groups and mayors, tech builders and artists, climate activists and diaspora organisers.
+            </p>
+            <p>
+              If your work sits where <strong>people, policy, and possibility</strong> meet, you belong here.
+            </p>
+            <div class="tiers">
+              <div class="tier">
+                <div><strong>Cities & Regions</strong><br />Host pilots, shape standards, gain global visibility.</div>
+                <div>Seats: 20</div>
+              </div>
+              <div class="tier">
+                <div><strong>Organisations & Funds</strong><br />Amplify your impact through joint programs.</div>
+                <div>Seats: 40</div>
+              </div>
+              <div class="tier">
+                <div><strong>Individuals</strong><br />Movers, researchers, organisers, storytellers.</div>
+                <div>Curated</div>
+              </div>
+            </div>
+            <div class="join-steps">
+              <p><strong>Three simple ways to join:</strong></p>
+              <ol>
+                <li><strong>Sign up above</strong> with your email to get invited to online calls.</li>
+                <li><strong>Tell us below</strong> what you’re working on and where you need allies.</li>
+                <li><strong>Show up</strong> for a digital or in-person session — we’ll match you into projects.</li>
+              </ol>
+            </div>
+          </div>
+          <div>
+            <div class="form">
+              <div class="badge">
+                <span class="bullet"></span>
+                Founding allies – deeper introduction
+              </div>
+              <form>
+                <div class="form-row">
+                  <label for="name">Name</label>
+                  <input id="name" name="name" placeholder="Your full name" />
+                </div>
+                <div class="form-row">
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="you@email.com" />
+                </div>
+                <div class="form-row">
+                  <label for="org">Organisation / city / community (optional)</label>
+                  <input id="org" name="org" placeholder="Where you work or who you represent" />
+                </div>
+                <div class="form-row">
+                  <label for="type">I’m mostly interested in…</label>
+                  <select id="type" name="type">
+                    <option value="">Select one</option>
+                    <option value="hosting">Hosting pilots in my city / region</option>
+                    <option value="funding">Funding or co-funding programs</option>
+                    <option value="research">Research / data / storytelling</option>
+                    <option value="organising">Community organising / advocacy</option>
+                    <option value="lived">Sharing my own migration / mobility story</option>
+                  </select>
+                </div>
+                <div class="form-row">
+                  <label for="why">What brings you to United Migrations?</label>
+                  <textarea id="why" name="why" rows="3" placeholder="In 3–5 sentences, tell us what you’re seeing, building, or dreaming of."></textarea>
+                  <div class="form-hint">
+                    This helps us match you with the right people and projects. We’re curating for depth, not size.
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <span>Request a call / invite</span><span>→</span>
+                </button>
+
+                <div class="form-divider">or</div>
+
+                <div class="form-row">
+                  <label for="updates">Just want to stay in the loop?</label>
+                  <input id="updates" name="updates" type="email" placeholder="Email for updates only" />
+                  <div class="form-hint">
+                    We’ll send you a low-noise digest with upcoming gatherings, pilots, and open roles.
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-ghost">
+                  <span>Subscribe to movement updates</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section">
+        <div class="section-header">
+          <div class="section-title">Common questions</div>
+          <div class="section-kicker">Quick answers, deep work</div>
+        </div>
+        <div class="section-grid">
+          <div>
+            <h3>Are you a UN body or a government agency?</h3>
+            <p>
+              No. United Migrations is independent by design. We work with institutions, but we are not bound by their
+              election cycles, PR battles, or bureaucracy.
+            </p>
+            <h3>Are you “for” or “against” migration?</h3>
+            <p>
+              We are for <strong>reality</strong>. Migration is already happening. Our work is to make it humane,
+              predictable, and mutually beneficial, instead of letting it be weaponised as a permanent culture war.
+            </p>
+          </div>
+          <div>
+            <h3>Where are you based?</h3>
+            <p>
+              United Migrations is built as a <strong>networked organisation</strong> with anchor hubs in key regions,
+              rather than one HQ. Our work follows the routes of movement, not the old map of power.
+            </p>
+            <h3>How will I actually get involved?</h3>
+            <p>
+              After you sign up, you’ll receive invitations to <strong>online circles</strong> grouped by interest
+              (cities, research, lived experience, funding). From there, you can plug into pilots, campaigns, or
+              storytelling projects that match your energy and time.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div>
+          © <span id="year"></span> United Migrations. Designed for a world where moving is normal.
+        </div>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#programs">Programs</a>
+          <a href="#join">Join</a>
+          <a href="#faq">Press &amp; Media</a>
+          <a href="mailto:hello@unitedmigrations.org">Contact</a>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Optional: subtle interactive tilt on mouse move
+    (function() {
+      const globe = document.getElementById("um-globe");
+      if (!globe) return;
+
+      const maxTilt = 10;
+
+      function handleMove(e) {
+        const rect = globe.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rx = ((y / rect.height) - 0.5) * -2 * maxTilt;
+        const ry = ((x / rect.width) - 0.5) * 2 * maxTilt;
+        globe.style.transform = `translate(-50%, -50%) rotateX(${18 + rx}deg) rotateY(${ry}deg)`;
+      }
+
+      function resetTilt() {
+        globe.style.transform = "translate(-50%, -50%) rotateX(18deg)";
+      }
+
+      globe.parentElement.addEventListener("mousemove", handleMove);
+      globe.parentElement.addEventListener("mouseleave", resetTilt);
+    })();
+  </script>
+</body>
+</html>
